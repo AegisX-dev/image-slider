@@ -1,0 +1,201 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e, #0f0f1c);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Slider container with glow */
+.slider-container {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out; /* Smooth slide transition */
+}
+
+/* Slide styling with hover zoom and bounce */
+.slide {
+    min-width: 100%;
+    height: 450px;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.3s, transform 0.3s ease-out;
+}
+
+.slide.active {
+    opacity: 1; /* Fully visible when active */
+}
+
+
+/* Navigation buttons with glow and pulse */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    animation: pulse 1s infinite; /* Pulse effect on hover */
+}
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
+
+/* Pulse animation for navigation buttons */
+@keyframes pulse {
+    0% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.1); }
+    100% { transform: translateY(-50%) scale(1); }
+}
+
+/* Enhanced caption styling with fade-in */
+.caption {
+    position: absolute;
+    bottom: 67px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    opacity: 0; /* Start hidden for fade-in */
+    animation: fadeIn 0.5s ease-in forwards; /* Fade-in on change */
+}
+
+/* Fade-in animation for caption */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Controls below the slider */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+/* Play/pause button with bounce on click */
+.play-pause-btn {
+    background: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.play-pause-btn:hover {
+    background: #ddd;
+    transform: scale(1.1);
+}
+
+.play-pause-btn:active {
+    animation: bounceClick 0.3s ease; /* Bounce on click */
+}
+
+.play-pause-btn.playing::before {
+    content: '▶'; /* Play icon */
+}
+
+/* Bounce animation for play/pause click */
+@keyframes bounceClick {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* Numbered indicators with scale and pulse */
+.indicators {
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.indicator.active {
+    background: #fff;
+    color: #000;
+    animation: pulseActive 1.5s infinite; /* Pulse when active */
+}
+
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+/* Pulse animation for active indicator */
+@keyframes pulseActive {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .slider-container {
+        width: 90%;
+    }
+    .slide {
+        height: 300px;
+    }
+    .nav-btn {
+        font-size: 20px;
+        padding: 8px;
+    }
+    .caption {
+        font-size: 18px;
+        bottom: 67px;
+    }
+    .indicator {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+}
